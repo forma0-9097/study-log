@@ -41,3 +41,28 @@ while queue:
         연결될 때마다 n - 1씩 해주면 됨
 
 '''
+
+from collections import deque
+
+def solution(n, computers):
+    
+    queue = deque()
+    visited = [False] * n
+
+    network_count = 0
+
+    for i in range(n):
+        if not visited[i]:
+            visited[i] = True
+            queue.append(i)
+
+            while queue:
+                node = queue.popleft()
+                for j in range(n):
+                    if not visited[j] and computers[node][j] == 1:
+                        visited[j] = True
+                        queue.append(j)
+
+            network_count += 1
+
+    return network_count
