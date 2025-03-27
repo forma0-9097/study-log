@@ -1,3 +1,7 @@
+############################
+#           BFS            #
+############################
+
 from collections import deque
 
 def solution(n, computers):
@@ -17,7 +21,6 @@ def solution(n, computers):
                         visited[j] = True
                         queue.append(computers[j])
                         n -= 1
-                        
     return n
 
 '''
@@ -42,7 +45,9 @@ while queue:
 
 '''
 
-from collections import deque
+############################
+#        정리한 BFS          #
+############################
 
 def solution(n, computers):
     
@@ -65,4 +70,27 @@ def solution(n, computers):
 
             network_count += 1
 
+    return network_count
+
+############################
+#           DFS            #
+############################
+
+def solution(n, computers):
+    
+    def dfs(node):
+        visited[node] = True
+        
+        for idx, connected in enumerate(computers[node]):
+            if not visited[idx] and connected == 1:
+                dfs(idx)
+    
+    network_count = 0
+    visited = [False] * n
+    
+    for i in range(n):
+        if not visited[i]:
+            dfs(i)
+            network_count += 1
+    
     return network_count
